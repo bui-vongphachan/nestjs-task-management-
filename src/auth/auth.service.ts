@@ -13,4 +13,8 @@ export class AuthService {
   signUp(authCredentailDto: AuthCredentailDto): Promise<void> {
     return this.userRepository.signUp(authCredentailDto);
   }
+
+  signIn(authCredentailDto: AuthCredentailDto) {
+    return this.userRepository.signIn(authCredentailDto);
+  }
 }
