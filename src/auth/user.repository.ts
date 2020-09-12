@@ -41,7 +41,7 @@ export class UserRepository extends Repository<User> {
       if (result === false) {
         throw new NotFoundException();
       }
-      return user;
+      return user.username;
     } catch (error) {
       return error;
     }

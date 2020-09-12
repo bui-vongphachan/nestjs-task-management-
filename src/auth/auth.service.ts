@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentailDto } from './dto/auth-credentials.dto';
+import { JwtPayload } from './jwt-payload.interface';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -18,10 +19,10 @@ export class AuthService {
   async signIn(
     authCredentailDto: AuthCredentailDto,
   ): Promise<{ accessToken: string }> {
-    const user = await this.userRepository.signIn(authCredentailDto);
-    if (!user) throw new NotFoundException();
+    const username = await this.userRepository.signIn(authCredentailDto);
+    if (!username) throw new NotFoundException();
 
-    const payload = { user };
+    const payload = { username };
     const accessToken = this.jwtSerivce.sign(payload);
 
     return { accessToken };
